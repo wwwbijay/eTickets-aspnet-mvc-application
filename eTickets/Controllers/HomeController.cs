@@ -1,5 +1,6 @@
 ﻿using eTickets.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace eTickets.Controllers
 
         public IActionResult Index()
         {
+          
             return View();
         }
 
