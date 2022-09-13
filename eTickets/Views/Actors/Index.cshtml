@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Actor> 
+
+@{
+    ViewData["Title"] = "Actors";
+}
+
+@*Write Code*@
+
+
+<div class="actors_entry">
+    <div class="row g-5">
+        @foreach (var item in Model)
+       {
+            <div class="col-md-3 actor_item">
+                <div class="actor_profile">
+                    <img src="@item.ProfilePicture" />
+                </div>
+                <div class="actor_info">
+                    <h4>@item.FullName</h4>
+                    <div class="actor_bio">
+                        @item.Bio
+                    </div>
+                    <div class="actor_actions">
+                        <a asp-controller="Actors" asp-action="Edit" asp-route-id="@item.Id"
+                       class="btn btn-primary">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <a asp-controller="Actors" asp-action="Details" asp-route-id="@item.Id"
+                       class="btn btn-success">
+                            <i class="bi bi-info-circle"></i>
+                        </a>
+                        <a asp-controller="Actors" asp-action="Delete" asp-route-id="@item.Id"
+                       class="btn btn-danger">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div class="floating-btn">
+    <a asp-controller="Actors" asp-action="Create" class="btn btn-success">
+        <i class="bi bi-plus-circle"></i> Create
+    </a>
+</div>

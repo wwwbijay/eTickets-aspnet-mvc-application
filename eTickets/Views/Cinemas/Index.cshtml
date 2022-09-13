@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Cinema>
+
+@{
+    ViewData["Title"] = "Cinemas";
+}
+
+@*Write Code*@
+
+<div class="row actors_entry">
+    <div class="col-md-8 offset-md-2">
+        @foreach (var item in Model)
+        {
+            <div class="row g-5">
+                <div class="col-md-3 actor_profile">
+                    <img src="@item.Logo" alt="@item.Name" />
+
+                </div>
+                <div class="col-md-9 actor_info">
+                    <h3>@item.Name</h3>
+                    <p>
+                        @item.Description
+                    </p>
+                    <div class="actor_actions">
+                        <a asp-controller="Cinemas" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
+                        <a asp-controller="Cinemas" asp-action="Details" asp-route-id="@item.Id" class="btn btn-success">View</a>
+                        <a asp-controller="Cinemas" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+
+            </div>
+        }
+
+    </div>
+</div>
+<div class="floating-btn">
+    <a asp-controller="Cinemas" asp-action="Create" class="btn btn-success">
+        <i class="bi bi-plus-circle"></i> Create
+    </a>
+</div>

@@ -62,10 +62,81 @@ body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
 }
+img{
+    max-width: 100%;
+}
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+}
+
+.hero{
+    background: url(../img/banner.jpg) right center no-repeat;
+    height: 300px;
+    color: #fff;
+}
+.hero h1{
+    line-height: 300px;
+}
+
+.actors_entry .row{
+    margin: 20px 0;
+}
+.floating-btn{
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 999;
+}
+    .floating-btn .btn {
+        border-radius: 30px;
+        padding: 10px 20px 10px 45px;
+    }
+    .floating-btn i {
+        font-size: 25px;
+        position: absolute;
+        left: 13px;
+        top: 50%;
+        margin-top: -18px;
+    }
+.actor_item{
+    margin: 0 0 30px;
+    text-align: center;
+}
+.actor_profile {
+    width: 130px;
+    height: 130px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+.actor_bio {
+    line-height: 1.5em;
+    height: 3em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+.item_actor_single img {
+    font-size: 14px;
+    line-height: 40px;
+    margin: 4px 0;
+    max-width: 40px;
+}
+.item_actor_single{
+    font-size: 14px;
+    line-height: 40px;
+}
+.movie-detail-actor h4 {
+    font-size: 18px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+    margin: 0;
+}
+.actor_actions{
+    margin: 20px 0;
 }

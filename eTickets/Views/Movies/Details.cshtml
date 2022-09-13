@@ -1,0 +1,99 @@
+﻿@model Movie
+
+@{
+    ViewData["Title"] = "Movie: @Model.Nam";
+}
+
+@*Write Code*@
+
+
+<div class="row actors_entry">
+    <div class="col-md-8">
+       
+            <div class="row g-5">
+                <div class="actor_profile">
+                    <img src="@Model.ImageUrl" alt="@Model.Name" />
+                </div>
+                <div class="actor_info">
+                    <h3>@Model.Name</h3>
+                    <div>
+                        @Model.Description
+                </div>
+                <div class="card-text">
+                        <strong>Cinema:</strong>
+                        <a asp-controller="Cinemas" asp-action="Details" asp-route-id="@Model.CinemaId">
+                        @Model.Cinema.Name
+                        </a>
+                </div>
+                <div class="card-text">
+                    <strong>Cinema:</strong>
+                    <a asp-controller="Producers" asp-action="Details" asp-route-id="@Model.ProducerId">
+                        @Model.Producer.FullName
+                    </a>
+                </div>
+
+                <div class="card-text movie-detail-actor">
+                    <h4>Actors:</h4>
+                    <div class="row">
+                        @foreach (var actor in Model.Actors_Movies)
+                       {
+                            <div class="item_actor_single col-md-12">
+                                <img class="border-info rounded-circle" src="@actor.Actor.ProfilePicture" />
+                                
+                                    <a asp-controller ="Actors"
+                                        asp-action="Details" 
+                                        asp-route-id="@actor.ActorId">
+                                        @actor.Actor.FullName
+                                     </a>
+                               
+                            </div>
+                           
+                       }
+                    </div>
+                   
+                </div>
+                <div class="card-text">
+                    <strong>Producer:</strong>
+                    <a asp-controller="Producers" asp-action="Details" asp-route-id="@Model.ProducerId">
+                        @Model.Producer.FullName
+                    </a>
+                </div>
+
+                <div class="card-text">
+                        <strong>Price:</strong>   @Model.Price
+                </div>
+                    <div class="card-text">
+                        <strong>Genre:</strong> @Model.MovieCategory
+                    </div>
+                        <div class="card-text">
+                        <strong>Status:</strong>
+                        @if (DateTime.Now > Model.StartDate && DateTime.Now < Model.EndDate)
+                        {
+                            <span class="badge bg-success text-white">AVAILABLE</span>
+                        }
+                        else if (DateTime.Now > Model.EndDate)
+                        {
+                            <span class="badge bg-danger text-white">EXPIRED</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-primary text-white">UPCOMING</span>
+                        }
+                    </div>
+
+                    <div class="actor_actions">
+                        <a asp-action="Index" class="btn btn-primary">
+                           Back to List
+                        </a>
+
+                        <a class="btn btn-success text-white">
+                            <i class="bi bi-cart"></i> Add to Cart
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        
+
+    </div>
+</div>

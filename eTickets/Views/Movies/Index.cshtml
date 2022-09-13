@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Movie>
+
+@{
+    ViewData["Title"] = "Movies";
+}
+
+@*Write Code*@
+
+
+<div class="row actors_entry">
+    <div class="col-md-8 offset-md-2">
+        @foreach (var item in Model)
+        {
+            <div class="row g-5">
+                <div class="col-md-3 actor_profile">
+                    <img src="@item.ImageUrl" alt="@item.Name" />
+                </div>
+                <div class="col-md-9 actor_info">
+                    <h3>@item.Name</h3>
+                    <p>
+                        @item.Description
+                    </p>
+                    <p>
+                       <strong>Cinema:</strong> @item.Cinema.Name
+                    </p>
+                    
+                    <p>
+                        <strong>Price:</strong>   @item.Price
+                    </p>
+                    <p>
+                        <strong>Genre:</strong> @item.MovieCategory
+                    </p>
+                    <p>
+                        <strong>Status:</strong>
+                        @if (DateTime.Now > item.StartDate && DateTime.Now < item.EndDate)
+                        {
+                            <span class="badge bg-success text-white">AVAILABLE</span>
+                        }
+                        else if (DateTime.Now > item.EndDate)
+                        {
+                            <span class="badge bg-danger text-white">EXPIRED</span>
+                        }else
+                        {
+                            <span class="badge bg-primary text-white">UPCOMING</span>
+                        }
+                    </p>
+                    
+                    <div class="actor_actions">
+                        <a asp-action="Edit" asp-route-id="@item.Id"
+                       class="btn btn-primary">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <a asp-action="Details" asp-route-id="@item.Id"
+                       class="btn btn-success">
+                            <i class="bi bi-info-circle"></i>
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id"
+                       class="btn btn-danger">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        }
+
+    </div>
+</div>
+<div class="floating-btn">
+    <a asp-controller="Movies" asp-action="Create" class="btn btn-success">
+        <i class="bi bi-plus-circle"></i> Create
+    </a>
+</div>
