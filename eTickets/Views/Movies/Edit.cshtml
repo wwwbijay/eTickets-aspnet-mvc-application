@@ -1,0 +1,85 @@
+﻿@model NewMovieVM
+@using eTickets.Data.Enums;
+
+@{
+    ViewData["Title"] = "Update Movie";
+}
+
+@*Write Code*@
+
+<div class="row actors_entry">
+    <div class="col-md-8 offset-md-2">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="form-group col col-md-6">
+                    <label asp-for="MovieCategory"></label>
+                    <select class ="form-control" asp-for="MovieCategory" 
+                            asp-items="@Html.GetEnumSelectList<MovieCategory>()">
+                    </select>
+                    <span asp-validation-for="MovieCategory" class="text-danger"></span>
+                </div>
+                <div class="form-group col col-`md-6">
+                    <label asp-for="Price"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="form-group col col-md-6">
+                    <label asp-for="StartDate"></label>
+                    <input type="date" asp-for="StartDate" class="form-control" />
+                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                </div>
+                <div class="form-group col col-md-6">
+                    <label asp-for="EndDate"></label>
+                    <input type="date" asp-for="EndDate" class="form-control" />
+                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ImageUrl"></label>
+                <input asp-for="ImageUrl" class="form-control" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+           
+
+            <div class="row">
+                <div class="form-group col col-md-4">
+                    <label asp-for="CinemaId"></label>
+                    <select asp-for="CinemaId" class="form-control" asp-items="ViewBag.Cinemas" ></select>
+                    <span asp-validation-for="CinemaId" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group col col-md-4">
+                    <label asp-for="ProducerId"></label>
+                    <select asp-for="ProducerId" class="form-control" asp-items="ViewBag.Producers"></select>
+                    <span asp-validation-for="ProducerId" class="text-danger"></span>
+                </div>
+                <div class="form-group col col-md-4">
+                    <label asp-for="ActorIds"></label>
+                    <select asp-for="ActorIds" class="form-control" multiple asp-items="ViewBag.Actors"></select>
+                    <span asp-validation-for="ActorIds" class="text-danger"></span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Update Movie" class="btn btn-outline-success float-right" />
+                <a class="btn btn-outline-dark float-left" asp-action="Index">Show All Actors</a>
+            </div>
+        </form>
+
+    </div>
+</div>

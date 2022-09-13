@@ -10,10 +10,11 @@ namespace eTickets.Models
 {
     public class NewMovieVM
     {
+        public int Id { get; set; }
         [Display(Name = "Movie Name")]
         [Required(ErrorMessage = "Name is Required!")]
         public string Name { get; set; }
-        [Display(Name = "Movie Name")]
+        [Display(Name = "Movie Description")]
         [Required(ErrorMessage = "Name is Required!")]
         public string Description { get; set; }
         [Display(Name = "Price in Rs.")]
