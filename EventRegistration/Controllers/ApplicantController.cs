@@ -7,12 +7,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EventRegistration.Data;
 using EventRegistration.Models;
+using System.Reflection.Metadata;
 
 namespace EventRegistration.Controllers
 {
     public class ApplicantController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly Int32 order_id_constant = 1111111;
 
         public ApplicantController(AppDbContext context)
         {
@@ -42,13 +44,22 @@ namespace EventRegistration.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index([Bind("FullName,Phone,Email,Address,City,Province,PerformanceType,ParticipantName,Gender,Age,GroupName,NoOfMembers,AgeGroupRange,GroupType,Details,OrderId,TransactionId,PaymentStatus")] Applicant applicant)
+        public async Task<IActionResult> Index([Bind("Id", "FullName,Phone,Email,Address,City,Province,PerformanceType,ParticipantName,Gender,Age,GroupName,NoOfMembers,AgeGroupRange,GroupType,Details,OrderId,TransactionId,PaymentStatus")] Applicant applicant)
         {
             if (ModelState.IsValid)
             {
+                applicant.PaymentStatus = Data.Enums.PaymentStatus.Pending;
                 _context.Add(applicant);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var id = applicant.Id;
+                applicant.OrderId = id + 1111111;
+                _context.Update(applicant);
+                await _context.SaveChangesAsync();
+
+                TempData["ID"] = applicant.Id;
+                TempData["ORDER_ID"] = applicant.OrderId;
+
+                return RedirectToAction(nameof(Checkout));
             }
             var data = new string[7] {
                 "Province 1",
@@ -148,6 +159,13 @@ namespace EventRegistration.Controllers
         private bool ApplicantExists(int id)
         {
             return _context.Applicants.Any(e => e.Id == id);
+        }
+
+        public IActionResult Checkout()
+        {  
+            ViewBag.applicant_Id = TempData["ID"];
+            ViewBag.applicant_orderId = TempData["ORDER_ID"];
+            return View();
         }
     }
 }
